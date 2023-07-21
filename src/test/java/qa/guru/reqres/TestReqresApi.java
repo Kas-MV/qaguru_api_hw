@@ -1,12 +1,13 @@
 package qa.guru.reqres;
 
 import org.junit.jupiter.api.Test;
+import qa.guru.state.BaseState;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class TestReqresApi {
+public class TestReqresApi extends BaseState {
 
     @Test
     void testPostRegistration() {
@@ -19,7 +20,7 @@ public class TestReqresApi {
                 .contentType(JSON)
                 .body(data)
                 .when()
-                .post("https://reqres.in/api/register")
+                .post("/api/register")
                 .then()
                 .log().status()
                 .statusCode(200)
@@ -38,7 +39,7 @@ public class TestReqresApi {
                 .contentType(JSON)
                 .body(data)
                 .when()
-                .post("https://reqres.in/api/users")
+                .post("/api/users")
                 .then()
                 .log().status()
                 .statusCode(201)
@@ -57,7 +58,7 @@ public class TestReqresApi {
                 .contentType(JSON)
                 .body(data)
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/api/login")
                 .then()
                 .log().status()
                 .statusCode(400)
@@ -75,7 +76,7 @@ public class TestReqresApi {
                 .contentType(JSON)
                 .body(data)
                 .when()
-                .put("https://reqres.in/api/users/2")
+                .put("/api/users/2")
                 .then()
                 .log().status()
                 .statusCode(200)
@@ -94,7 +95,7 @@ public class TestReqresApi {
                 .contentType(JSON)
                 .body(data)
                 .when()
-                .patch("https://reqres.in/api/users/2")
+                .patch("/api/users/2")
                 .then()
                 .log().status()
                 .statusCode(200)
@@ -109,7 +110,7 @@ public class TestReqresApi {
                 .log().all()
                 .param("page", 1)
                 .when()
-                .delete("https://reqres.in/api/users/2")
+                .delete("/api/users/2")
                 .then()
                 .log().all()
                 .statusCode(204);
@@ -122,7 +123,7 @@ public class TestReqresApi {
                 .log().all()
                 .param("page", 2)
                 .when()
-                .get("https://reqres.in/api/users")
+                .get("/api/users")
                 .then()
                 .log().all()
                 .statusCode(200)
